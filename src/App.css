@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem;
+  padding: 2rem;
   height: 100vh;
   background-image: url(./shared/cloud.jpg);
   background-size: cover;
@@ -17,24 +17,52 @@
 .inner-container {
   display: flex;
   flex-direction: column;
-  padding: 4rem;
+  padding: 2rem;
   align-items: center;
-  gap: 2rem;
-  background-color: rgba(255, 255, 255, 0.575);
+  background-color: #caf0f8b5;
   border-radius: 20px;
-  width: 80%;
+  min-width: 600px;
+  max-width: 600px;
   margin: auto;
  justify-content: center;
 }
 
 .inner-container input {
   margin: auto;
-  width: 50%;
+  width: 70%;
   margin: auto;
   padding: 0.2rem 0;
-  border-radius: 20px;
   text-align: center;
-  border: none
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+}
+
+.inner-container input:focus{
+  outline: none;
+}
+
+.current-weather-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #0077b6;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 20px;
+  color: white;
+  gap: 0.2rem;
+}
+.location-name{
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  color: white;
+}
+
+.current-weather {
+  font-size: 2.5rem;
+  
 }
 
 
@@ -82,7 +110,33 @@
 
 .forecast-container{
   display: flex;
-  gap: 4rem;
-  background-color: white;
+  flex-direction: column;
+  background-color: #0077b6;
+  border-radius: 20px;
+  width: 100%;
+  color: white;
+  margin-top: 2rem;
+}
+
+.forecast-title{
+  text-align: center;
+  padding: 1rem 0;
+
+}
+
+.forecast-day{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+ 
+}
+
+.forecast-day:not(:last-child){
+  border-bottom: 2px solid rgba(225, 222, 222, 0.509);
+}
+
+.forecast-icon {
+  width: 50px;
 }
 

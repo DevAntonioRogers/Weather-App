@@ -28,32 +28,30 @@ function App() {
           onKeyDown={handleSearch}
           type='text'
         />
-        <div className='city-title'>
-          {data.location ? <h1>{data.location.name}</h1> : null}
-        </div>
 
         <div className='current-weather-container'>
-          {data.current ? <p>{data.current.temp_f.toFixed()}°F</p> : null}
-          {data.current ? <span>{data.current.condition.text}</span> : null}
-        </div>
-        <div>
-          {data.forecast ? <span>High: {data.forecast.forecastday[0].day.maxtemp_f.toFixed()}°F</span> : null}
-          {data.forecast ? <span>Low: {data.forecast.forecastday[0].day.mintemp_f.toFixed()}°F</span> : null}
+          <div className='location-name'>
+            {data.location ? <h1>{data.location.name}</h1> : null}
+          </div>
+
+          <div>
+            {data.current ? <p className='current-weather'>{data.current.temp_f.toFixed()}°</p> : null}
+            {data.current ? <span className='current-weather-condition'>{data.current.condition.text}</span> : null}
+          </div>
+          <div>
+            {data.forecast ? <span>High: {data.forecast.forecastday[0].day.maxtemp_f.toFixed()}°</span> : null}
+            {data.forecast ? <span>Low: {data.forecast.forecastday[0].day.mintemp_f.toFixed()}°</span> : null}
+          </div>
         </div>
 
         <div className='forecast-container'>
+          <span className='forecast-title'>7 Day Forecast</span>
           {data.forecast ? data.forecast.forecastday.map((day, index) => (
             <div key={index} className='forecast-day'>
-              <p className='forecast-date'>{day.date}</p>
-              <div className='forecast-details'>
-                <div className='forecast-icon'>
-                  <img src={day.day.condition.icon} alt={day.day.condition.text} />
-                </div>
-                <div className='forecast-temps'>
-                  <p className='forecast-temp-high'>High: {day.day.maxtemp_f.toFixed()}°F</p>
-                  <p className='forecast-temp-low'>Low: {day.day.mintemp_f.toFixed()}°F</p>
-                </div>
-              </div>
+              <p className='forecast-date'>{day.date}: </p>
+              <img className='forecast-icon' src={day.day.condition.icon} alt={day.day.condition.text} />
+              <p className='forecast-temp-high'>High: {day.day.maxtemp_f.toFixed()}°</p>
+              <p className='forecast-temp-low'>Low: {day.day.mintemp_f.toFixed()}°</p>
             </div>
           )) : null}
         </div>
