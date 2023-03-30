@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css';
 
 import { ThreeDots } from 'react-loader-spinner'
+import Rain from '../src/shared/rain.mp4'
 
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
 
     <div className='app-container' >
       <div className='inner-container'>
+
+
+
         {loading ? <div>
           <ThreeDots
             height="80"
