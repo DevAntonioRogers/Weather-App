@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css';
 
 import { ThreeDots } from 'react-loader-spinner'
-import Rain from '../src/shared/rain.mp4'
+
 
 
 function App() {
@@ -10,18 +10,32 @@ function App() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
 
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`
 
   const handleSearch = async (e) => {
     if (e.key === 'Enter') {
       setLoading(true)
-      setLocation('')
+
       setTimeout(async () => {
-        const response = await fetch(url)
-        const data = await response.json()
-        setData(data)
-        setLoading(false)
+        try {
+          const response = await fetch(url)
+          if (!response.ok) {
+            throw new Error()
+          }
+          const data = await response.json()
+          setData(data)
+          setLoading(false)
+          setLocation('')
+          setError('')
+        } catch (error) {
+          setError('City not found bro')
+          console.log(error)
+          setData({})
+          setLoading(false)
+        }
       }, 1000)
 
     }
@@ -57,33 +71,35 @@ function App() {
             />
 
 
+            {error ? <div><p>{error}</p></div> : (
+              <>
+                <div className='current-weather-container'>
+                  <div className='location-name'>
+                    {data.location ? <h1>{data.location.name}</h1> : null}
+                  </div>
 
-            <div className='current-weather-container'>
-              <div className='location-name'>
-                {data.location ? <h1>{data.location.name}</h1> : null}
-              </div>
-
-              <div>
-                {data.current ? <p className='current-weather'>{data.current.temp_f.toFixed()}°</p> : null}
-                {data.current ? <span className='current-weather-condition'>{data.current.condition.text}</span> : null}
-              </div>
-              <div>
-                {data.forecast ? <span>High: {data.forecast.forecastday[0].day.maxtemp_f.toFixed()}°</span> : null}
-                {data.forecast ? <span>Low: {data.forecast.forecastday[0].day.mintemp_f.toFixed()}°</span> : null}
-              </div>
-            </div>
-
-            <div className='forecast-container'>
-              <span className='forecast-title'>7 Day Forecast</span>
-              {data.forecast ? data.forecast.forecastday.map((day, index) => (
-                <div key={index} className='forecast-day'>
-                  <p className='forecast-date'>{day.date}: </p>
-                  <img className='forecast-icon' src={day.day.condition.icon} alt={day.day.condition.text} />
-                  <p className='forecast-temp-high'>High: {day.day.maxtemp_f.toFixed()}°</p>
-                  <p className='forecast-temp-low'>Low: {day.day.mintemp_f.toFixed()}°</p>
+                  <div>
+                    {data.current ? <p className='current-weather'>{data.current.temp_f.toFixed()}°</p> : null}
+                    {data.current ? <span className='current-weather-condition'>{data.current.condition.text}</span> : null}
+                  </div>
+                  <div>
+                    {data.forecast ? <span>High: {data.forecast.forecastday[0].day.maxtemp_f.toFixed()}°</span> : null}
+                    {data.forecast ? <span>Low: {data.forecast.forecastday[0].day.mintemp_f.toFixed()}°</span> : null}
+                  </div>
                 </div>
-              )) : null}
-            </div>
+
+                <div className='forecast-container'>
+                  <span className='forecast-title'>7 Day Forecast</span>
+                  {data.forecast ? data.forecast.forecastday.map((day, index) => (
+                    <div key={index} className='forecast-day'>
+                      <p className='forecast-date'>{day.date}: </p>
+                      <img className='forecast-icon' src={day.day.condition.icon} alt={day.day.condition.text} />
+                      <p className='forecast-temp-high'>High: {day.day.maxtemp_f.toFixed()}°</p>
+                      <p className='forecast-temp-low'>Low: {day.day.mintemp_f.toFixed()}°</p>
+                    </div>
+                  )) : null}
+                </div>
+              </>)}
 
           </>)}
       </div>
