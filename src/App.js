@@ -11,6 +11,7 @@ function App() {
   const [location, setLocation] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [background, setBackground] = useState('')
 
 
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`
@@ -41,14 +42,14 @@ function App() {
     }
   }
 
+
+
+
   return (
 
 
     <div className='app-container' >
-      <div className='inner-container'>
-
-
-
+      <div className={`inner-container ${data.current && data.current.is_day === 0 ? "night" : ""} ${data.current && data.current.is_day > 0 ? "day" : ""}`}>
         {loading ? <div>
           <ThreeDots
             height="80"
@@ -79,7 +80,7 @@ function App() {
                   </div>
 
                   <div>
-                    {data.current ? <p className='current-weather'>{data.current.temp_f.toFixed()}°</p> : null}
+                    {data.current ? <p className='current-weather'>{data.current.temp_f.toFixed()}<span className='temp-circle'>°</span></p> : null}
                     {data.current ? <span className='current-weather-condition'>{data.current.condition.text}</span> : null}
                   </div>
                   <div>

@@ -11,7 +11,7 @@
   padding: 2rem;
   background-image: url(./shared/cloud.jpg);
   background-size: cover;
-  height: 100vh;
+  height: 100%;
 }
 
 .inner-container {
@@ -19,7 +19,7 @@
   flex-direction: column;
   padding: 2rem;
   align-items: center;
-  background-color: #caf0f8b5;
+  background-color: #14213d;
   border-radius: 20px;
   width: 100%;
   max-width: 500px;
@@ -31,14 +31,13 @@
 
 .inner-container input {
   margin: auto;
-  width: 70%;
+  width: 80%;
   margin: auto;
-  padding: 0.2rem 0;
+  padding: 0.5rem;
   text-align: center;
   border: none;
-  background-color: transparent;
-  border-bottom: 1px solid black;
-  margin-bottom: 1rem;
+  background-color: #fff;
+  border-radius: 3px;
 }
 
 .inner-container input:focus{
@@ -48,22 +47,27 @@
 .current-weather-container{
   display: flex;
   flex-direction: column;
-  background-color: #0077b6;
   padding: 1rem;
   margin-top: 1rem;
   border-radius: 20px;
   color: white;
-  gap: 0.2rem;
+  text-align: center;
+  width: 100%;
 }
 .location-name{
-  font-size: 1.5rem;
-  margin-top: 1rem;
+  font-size: 12px;
   text-transform: uppercase;
   color: white;
 }
 
 .current-weather {
-  font-size: 2.5rem;
+  font-size: 100px;
+}
+
+.temp-circle{
+  font-size: 50px;
+  vertical-align: top;
+
   
 }
 
@@ -142,3 +146,15 @@
   width: 50px;
 }
 
+
+.night {
+  background-image: url(/src/shared/night.png);
+  background-size: cover;
+  
+}
+
+.day {
+  background-image: url(/src/shared/day.png);
+  background-size: cover;
+  
+}
