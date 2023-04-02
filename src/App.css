@@ -11,12 +11,10 @@
   padding: 2rem;
   background-image: url(./shared/cloud.jpg);
   background-size: cover;
-  height: 100%;
+  height: 800px;
 }
 
 .inner-container {
-  display: flex;
-  flex-direction: column;
   padding: 2rem;
   align-items: center;
   background-color: #14213d;
@@ -25,14 +23,16 @@
   max-width: 500px;
   margin: auto;
   justify-content: center;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
 }
 
 
 
 .inner-container input {
   margin: auto;
-  width: 80%;
-  margin: auto;
+  width: 100%;
   padding: 0.5rem;
   text-align: center;
   border: none;
@@ -67,62 +67,43 @@
 .temp-circle{
   font-size: 50px;
   vertical-align: top;
-
-  
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.current-weather-condition{
+ font-size: 1.2rem;
+}
 
 
 .forecast-container{
-  display: flex;
-  flex-direction: column;
-  background-color: #0077b6;
-  border-radius: 20px;
+  background-color: transparent;
   width: 100%;
   color: white;
   margin-top: 2rem;
+  position: absolute;
+  bottom: 0;
+  height: 200px;
+  left: 0;
 }
+
+.forecast-inner-container {
+  width: 100%;
+  height: 200px;
+  /* background-color: rgba(255, 255, 255, 0.468); */
+  background-color: #14213d46;
+  z-index: 20;
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
+
+
+
 
 .forecast-title{
   text-align: center;
@@ -133,17 +114,19 @@
 .forecast-day{
   display: flex;
   align-items: center;
-  gap: 2rem;
   justify-content: center;
- 
+  flex-direction: column;
 }
 
-.forecast-day:not(:last-child){
-  border-bottom: 2px solid rgba(225, 222, 222, 0.509);
+.forecast-temps{
+  display: flex;
+  gap: 0.5rem;
+  text-align: center;
 }
+
 
 .forecast-icon {
-  width: 50px;
+  width: 60px;
 }
 
 
