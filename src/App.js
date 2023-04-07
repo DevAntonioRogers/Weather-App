@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import './App.css';
 
-import { ThreeDots } from 'react-loader-spinner'
-import Divider from '../src/shared/wavedivider.svg'
-
-
+import { MutatingDots, ThreeDots } from 'react-loader-spinner'
 
 function App() {
 
@@ -14,7 +11,7 @@ function App() {
   const [error, setError] = useState('')
 
 
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=10&aqi=yes&alerts=yes`
 
   const handleSearch = async (e) => {
     if (e.key === 'Enter') {
@@ -45,21 +42,22 @@ function App() {
 
 
 
+
+
+
+
   return (
-
-
-    <div className='app-container' >
-      <div className={`inner-container ${data.current && data.current.is_day === 0 ? "night" : ""} ${data.current && data.current.is_day > 0 ? "day" : ""}`}>
-        {loading ? <div>
+    <div className={`app-container ${data.current && data.current.is_day === 0 ? "app-container-night" : ""} ${data.current && data.current.is_day > 0 ? "app-container-day" : ""}`} >
+      <div className={`inner-container ${data.current && data.current.is_day === 0 ? "night" : ""} ${data.current && data.current.is_day > 0 ? "day" : ""}`} >
+        {loading ? <div className='loading'>
           <ThreeDots
             height="80"
             width="80"
             radius="9"
-            color="#4fa94d"
+            color="#fff"
             ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
-            wrapperClassName=""
             visible={true}
+
           />
         </div> : (
           <>
@@ -70,9 +68,7 @@ function App() {
               onKeyDown={handleSearch}
               type='text'
             />
-
-
-            {error ? <div><p>{error}</p></div> : (
+            {error ? <div className='error'><p>{error}</p></div> : (
               <div className='container'>
                 <div className='current-weather-container'>
                   <div className='location-name'>
@@ -93,7 +89,7 @@ function App() {
                   <div className='forecast-inner-container'>
                     {data.forecast ? data.forecast.forecastday.map((day, index) => (
                       <div key={index} className='forecast-day'>
-                        <p className='forecast-date'>{new Date(day.date).toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' }).replace('/', '/')}</p>
+                        <p className='forecast-date'>{day.date}</p>
                         <img className='forecast-icon' src={day.day.condition.icon} alt={day.day.condition.text} />
                         <div className='forecast-temps'>
                           <p className='forecast-temp-high'>H {day.day.maxtemp_f.toFixed()}°</p>
@@ -104,7 +100,6 @@ function App() {
                   </div>
                 </div>
               </div>)}
-
           </>)}
       </div>
     </div>

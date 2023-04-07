@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
 *{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .app-container{
@@ -9,9 +12,10 @@
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-  background-image: url(./shared/cloud.jpg);
+  
+  
   background-size: cover;
-  height: 800px;
+  height: 100vh;
 }
 
 .inner-container {
@@ -26,6 +30,7 @@
   position: relative;
   height: 100%;
   overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 
@@ -55,13 +60,16 @@
   width: 100%;
 }
 .location-name{
-  font-size: 12px;
+  font-size: 15px;
   text-transform: uppercase;
   color: white;
+  font-weight: 700;
 }
 
 .current-weather {
-  font-size: 100px;
+  font-size: 125px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .temp-circle{
@@ -99,8 +107,9 @@
   position: relative;
   display: flex;
   gap: 2rem;
-  position: relative;
+  padding: 1rem;
 }
+
 
 
 
@@ -116,6 +125,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-weight: 700;
+
 }
 
 .forecast-temps{
@@ -129,6 +140,24 @@
   width: 60px;
 }
 
+.loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
 
 .night {
   background-image: url(/src/shared/night.png);
@@ -139,5 +168,16 @@
 .day {
   background-image: url(/src/shared/day.png);
   background-size: cover;
-  
+}
+
+.app-container-day{
+  background: #F2994A;
+  background: -webkit-linear-gradient(to right, #F2C94C, #F2994A);
+  background: linear-gradient(to right, #F2C94C, #F2994A); 
+}
+
+.app-container-night{
+  background: #0f0c29;
+  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
 }
