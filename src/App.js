@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css';
 
-import { MutatingDots, ThreeDots } from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner'
 
 function App() {
 
@@ -9,9 +9,9 @@ function App() {
   const [location, setLocation] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [height, setHeight] = useState(false)
 
-
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=10&aqi=yes&alerts=yes`
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`
 
   const handleSearch = async (e) => {
     if (e.key === 'Enter') {
@@ -28,13 +28,16 @@ function App() {
           setLoading(false)
           setLocation('')
           setError('')
+          setHeight(true)
         } catch (error) {
           setError('City not found bro')
           console.log(error)
           setData({})
           setLoading(false)
+          setHeight(false)
         }
       }, 1000)
+
 
     }
   }
@@ -48,7 +51,7 @@ function App() {
 
   return (
     <div className={`app-container ${data.current && data.current.is_day === 0 ? "app-container-night" : ""} ${data.current && data.current.is_day > 0 ? "app-container-day" : ""}`} >
-      <div className={`inner-container ${data.current && data.current.is_day === 0 ? "night" : ""} ${data.current && data.current.is_day > 0 ? "day" : ""}`} >
+      <div className={`inner-container ${data.current && data.current.is_day === 0 ? "night" : ""} ${data.current && data.current.is_day > 0 ? "day" : ""}`} style={{ height: height ? '100%' : '50%' }}>
         {loading ? <div className='loading'>
           <ThreeDots
             height="80"
@@ -62,7 +65,7 @@ function App() {
         </div> : (
           <>
             <input
-              value={location}
+              // value={location}
               onChange={e => setLocation(e.target.value)}
               placeholder='Search City'
               onKeyDown={handleSearch}
@@ -89,7 +92,7 @@ function App() {
                   <div className='forecast-inner-container'>
                     {data.forecast ? data.forecast.forecastday.map((day, index) => (
                       <div key={index} className='forecast-day'>
-                        <p className='forecast-date'>{day.date}</p>
+                        <p className='forecast-date'>{new Date(day.date).toLocaleString('en-US', { weekday: 'short' })}</p>
                         <img className='forecast-icon' src={day.day.condition.icon} alt={day.day.condition.text} />
                         <div className='forecast-temps'>
                           <p className='forecast-temp-high'>H {day.day.maxtemp_f.toFixed()}°</p>
@@ -102,7 +105,7 @@ function App() {
               </div>)}
           </>)}
       </div>
-    </div>
+    </div >
   );
 }
 

@@ -13,7 +13,7 @@
   justify-content: center;
   padding: 2rem;
   
-  
+  background-color: rgb(98, 98, 158);
   background-size: cover;
   height: 100vh;
 }
@@ -94,13 +94,13 @@
   margin-top: 2rem;
   position: absolute;
   bottom: 0;
-  height: 200px;
+  height: 150px;
   left: 0;
 }
 
 .forecast-inner-container {
   width: 100%;
-  height: 200px;
+  height: 150px;
   /* background-color: rgba(255, 255, 255, 0.468); */
   background-color: #14213d46;
   z-index: 20;
@@ -108,6 +108,15 @@
   display: flex;
   gap: 2rem;
   padding: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+
+.forecast-inner-container::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent;
 }
 
 
